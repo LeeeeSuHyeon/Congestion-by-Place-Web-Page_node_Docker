@@ -35,10 +35,12 @@ app.use(bodyParser.urlencoded({extended: false}));
 // 사용자 정의 모듈 
 var rootRouter = require('./router/rootRouter');
 var authRouter = require('./router/authRouter');
+var shopRouter = require('./router/shopRouter');
 
 // 라우팅 
 app.use('/', rootRouter);
 app.use('/auth', authRouter)
+app.use('/shop', shopRouter)
 
 
 //정적 파일 폴더 지정

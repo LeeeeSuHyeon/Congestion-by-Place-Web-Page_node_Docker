@@ -1,0 +1,126 @@
+<!-- 201935312 이수현 views/merchandiseCU.ejs -->
+
+<div class="container">	
+    <script>
+
+        function displayFileName(){
+            var fileName = $("#file").val();
+            $(".upload-name").val(fileName);
+        }
+    </script>
+    <h2>가게 등록</h2>
+
+	<% if (shop !== null){ %>
+		<form action="/shop/update_process" method="post" enctype="multipart/form-data">
+			<div class="mb-3">
+				<label class="form-label" for="id">위치</label> 
+				<select name = "location" id = "id">
+					<option value="교내" <% if (shop.location === '교내') { %>selected<% } %>>교내</option>
+					<option value="태평동" <% if (shop.location === '태평동') { %>selected<% } %>>태평동</option>
+					<option value="복정동" <% if (shop.location === '복정동') { %>selected<% } %>>복정동</option>
+				</select>
+			</div>
+			<div class="mb-3">
+				<label class="form-label" for="id">카테고리</label> 
+				<select name = "category" id = "id">
+					<option value="음식점" <% if (shop.location === '음식점') { %>selected<% } %>>음식점</option>
+					<option value="카페" <% if (shop.location === '카페') { %>selected<% } %>>카페</option>
+					<option value="헬스장" <% if (shop.location === '헬스장') { %>selected<% } %>>헬스장</option>
+				</select>
+			</div>
+			<div class="mb-3">
+				<label class="form-label" for="id">가게 이름</label> 
+				<input class="form-control" type="text" name="name" style = "width:300px;" value ="<%=shop.name%>" />
+			</div>
+			<div class="mb-3">
+				<label class="form-label" for="id">총 인원</label> 
+				<input class="form-control" type="text" name="total_user" style="width:300px;" value ="<%=shop.total_user%>" />
+			</div>
+			<div class="mb-3">
+				<label class="form-label" for="id">현재 인원</label> 
+				<input class="form-control" type="text" name="user" style="width:300px;" value ="<%=shop.user%>"/>
+			</div>
+			<div class="mb-3">
+				<label class="form-label" for="id">영업 시작 시간</label> 
+				<input class="form-control" type="text" name="start_time" style="width:300px;" value ="<%=shop.start_time%>"/>
+			</div>
+			<div class="mb-3">
+				<label class="form-label" for="id">영업 종료 시간</label> 
+				<input class="form-control" type="text" name="end_time" style="width:300px;" value ="<%=shop.end_time%>"/>
+			</div>
+			<div class="mb-3">
+				<label class="form-label" for="id">현재 영업 여부</label> 
+				<input class="form-check-input" type="checkbox" name="is_open" value= <%= shop.is_open === true ? 'checked' : '' %> />
+			</div>
+			<div class="mb-3">
+				<label class="form-label" for="id">가게 주소</label> 
+				<input class="form-control" type="text" name="address" style="width:300px;" value ="<%=shop.address%>"/>
+			</div>
+			<input type="hidden" name="businessperson_loginid" value="<%=shop.businessperson_loginid%>">
+	
+			<div class="mb-3">
+				<input class="upload-name" value="" name = "image" placeholder="대표 사진">
+				<input type="file" id="file" name="uploadFile" onchange="displayFileName()">
+			</div>
+			<button class="btn btn-outline-primary btn-sm" type="submit">입력</button>
+	  </form>
+	<% } 
+	else { %>
+		<form action="/shop/create_process" method="post" enctype="multipart/form-data">
+
+			<div class="mb-3">
+				<label class="form-label" for="id">위치</label> 
+				<select name = "location" id = "id">
+					<option value="교내" <% if (shop.location === '교내') { %>selected<% } %>>교내</option>
+					<option value="태평동" <% if (shop.location === '태평동') { %>selected<% } %>>태평동</option>
+					<option value="복정동" <% if (shop.location === '복정동') { %>selected<% } %>>복정동</option>
+				</select>
+			</div>
+			<div class="mb-3">
+				<label class="form-label" for="id">카테고리</label> 
+				<select name = "category" id = "id">
+					<option value="음식점" <% if (shop.location === '음식점') { %>selected<% } %>>음식점</option>
+					<option value="카페" <% if (shop.location === '카페') { %>selected<% } %>>카페</option>
+					<option value="헬스장" <% if (shop.location === '헬스장') { %>selected<% } %>>헬스장</option>
+				</select>
+			</div>
+			<div class="mb-3">
+				<label class="form-label" for="id">가게 이름</label> 
+				<input class="form-control" type="text" name="name" style = "width:300px;" value ="<%=shop.name%>" />
+			</div>
+			<div class="mb-3">
+				<label class="form-label" for="id">총 인원</label> 
+				<input class="form-control" type="text" name="total_user" style="width:300px;" value ="<%=shop.total_user%>" />
+			</div>
+			<div class="mb-3">
+				<label class="form-label" for="id">현재 인원</label> 
+				<input class="form-control" type="text" name="user" style="width:300px;" value ="<%=shop.user%>"/>
+			</div>
+			<div class="mb-3">
+				<label class="form-label" for="id">영업 시작 시간</label> 
+				<input class="form-control" type="text" name="start_time" style="width:300px;" value ="<%=shop.start_time%>"/>
+			</div>
+			<div class="mb-3">
+				<label class="form-label" for="id">영업 종료 시간</label> 
+				<input class="form-control" type="text" name="end_time" style="width:300px;" value ="<%=shop.end_time%>"/>
+			</div>
+			<div class="mb-3">
+				<label class="form-label" for="id">현재 영업 여부</label> 
+				<input class="form-check-input" type="checkbox" name="is_open" value= <%= shop.is_open === true ? 'checked' : '' %> />
+			</div>
+			<div class="mb-3">
+				<label class="form-label" for="id">가게 주소</label> 
+				<input class="form-control" type="text" name="address" style="width:300px;" value ="<%=shop.address%>"/>
+			</div>
+			<input type="hidden" name="businessperson_loginid" value="<%=shop.businessperson_loginid%>">
+	
+			<div class="mb-3">
+				<input class="upload-name" value="" name = "image" placeholder="대표 사진">
+				<input type="file" id="file" name="uploadFile" onchange="displayFileName()">
+			</div>
+			<button class="btn btn-outline-primary btn-sm" type="submit">입력</button>
+	  </form>
+	<% } %>
+	
+</div>
+
