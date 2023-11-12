@@ -50,7 +50,7 @@
 			</div>
 			<div class="mb-3">
 				<label class="form-label" for="id">현재 영업 여부</label> 
-				<input class="form-check-input" type="checkbox" name="is_open" value= <%= shop.is_open === true ? 'checked' : '' %> />
+				<input class="form-check-input" type="checkbox" name="is_open" value= <%  shop.is_open === true ? 'checked' : '' %> />
 			</div>
 			<div class="mb-3">
 				<label class="form-label" for="id">가게 주소</label> 
@@ -71,49 +71,47 @@
 			<div class="mb-3">
 				<label class="form-label" for="id">위치</label> 
 				<select name = "location" id = "id">
-					<option value="교내" <% if (shop.location === '교내') { %>selected<% } %>>교내</option>
-					<option value="태평동" <% if (shop.location === '태평동') { %>selected<% } %>>태평동</option>
-					<option value="복정동" <% if (shop.location === '복정동') { %>selected<% } %>>복정동</option>
+					<option value="교내">교내</option>
+					<option value="태평동">태평동</option>
+					<option value="복정동">복정동</option>
 				</select>
 			</div>
 			<div class="mb-3">
 				<label class="form-label" for="id">카테고리</label> 
 				<select name = "category" id = "id">
-					<option value="음식점" <% if (shop.location === '음식점') { %>selected<% } %>>음식점</option>
-					<option value="카페" <% if (shop.location === '카페') { %>selected<% } %>>카페</option>
-					<option value="헬스장" <% if (shop.location === '헬스장') { %>selected<% } %>>헬스장</option>
+					<option value="음식점" >음식점</option>
+					<option value="카페" >카페</option>
+					<option value="헬스장" >헬스장</option>
 				</select>
 			</div>
 			<div class="mb-3">
 				<label class="form-label" for="id">가게 이름</label> 
-				<input class="form-control" type="text" name="name" style = "width:300px;" value ="<%=shop.name%>" />
+				<input class="form-control" type="text" name="name" style = "width:300px;" />
 			</div>
 			<div class="mb-3">
 				<label class="form-label" for="id">총 인원</label> 
-				<input class="form-control" type="text" name="total_user" style="width:300px;" value ="<%=shop.total_user%>" />
+				<input class="form-control" type="text" name="total_user" style="width:300px;"  />
 			</div>
 			<div class="mb-3">
 				<label class="form-label" for="id">현재 인원</label> 
-				<input class="form-control" type="text" name="user" style="width:300px;" value ="<%=shop.user%>"/>
+				<input class="form-control" type="text" name="user" style="width:300px;" />
 			</div>
 			<div class="mb-3">
 				<label class="form-label" for="id">영업 시작 시간</label> 
-				<input class="form-control" type="text" name="start_time" style="width:300px;" value ="<%=shop.start_time%>"/>
+				<input class="form-control" type="text" name="start_time" placeholder="09:00" style="width:300px;"/>
 			</div>
 			<div class="mb-3">
 				<label class="form-label" for="id">영업 종료 시간</label> 
-				<input class="form-control" type="text" name="end_time" style="width:300px;" value ="<%=shop.end_time%>"/>
+				<input class="form-control" type="text" name="end_time" placeholder="09:00" style="width:300px;" />
 			</div>
 			<div class="mb-3">
 				<label class="form-label" for="id">현재 영업 여부</label> 
-				<input class="form-check-input" type="checkbox" name="is_open" value= <%= shop.is_open === true ? 'checked' : '' %> />
+				<input class="form-check-input" type="checkbox" name="is_open" />
 			</div>
 			<div class="mb-3">
 				<label class="form-label" for="id">가게 주소</label> 
-				<input class="form-control" type="text" name="address" style="width:300px;" value ="<%=shop.address%>"/>
+				<input class="form-control" type="text" name="address" style="width:300px;"/>
 			</div>
-			<input type="hidden" name="businessperson_loginid" value="<%=shop.businessperson_loginid%>">
-	
 			<div class="mb-3">
 				<input class="upload-name" value="" name = "image" placeholder="대표 사진">
 				<input type="file" id="file" name="uploadFile" onchange="displayFileName()">
