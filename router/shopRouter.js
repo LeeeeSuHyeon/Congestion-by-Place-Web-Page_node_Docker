@@ -43,7 +43,7 @@ router.post('/update_process',upload.single('uploadFile'),(req,res)=>{
     shop.update_process(req,res,file);
 })
 
-router.get('/delete/:merId',(req,res)=>{
+router.get('/delete/:shopId',(req,res)=>{
     shop.delete_process(req,res);
 })
 

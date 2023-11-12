@@ -12,6 +12,7 @@
 
 	<% if (shop !== null){ %>
 		<form action="/shop/update_process" method="post" enctype="multipart/form-data">
+			<input type="hidden" name = shop_id value="<%= shop.shop_id%>" />
 			<div class="mb-3">
 				<label class="form-label" for="id">위치</label> 
 				<select name = "location" id = "id">
@@ -23,9 +24,9 @@
 			<div class="mb-3">
 				<label class="form-label" for="id">카테고리</label> 
 				<select name = "category" id = "id">
-					<option value="음식점" <% if (shop.location === '음식점') { %>selected<% } %>>음식점</option>
-					<option value="카페" <% if (shop.location === '카페') { %>selected<% } %>>카페</option>
-					<option value="헬스장" <% if (shop.location === '헬스장') { %>selected<% } %>>헬스장</option>
+					<option value="음식점" <% if (shop.category === '음식점') { %>selected<% } %>>음식점</option>
+					<option value="카페" <% if (shop.category === '카페') { %>selected<% } %>>카페</option>
+					<option value="헬스장" <% if (shop.category === '헬스장') { %>selected<% } %>>헬스장</option>
 				</select>
 			</div>
 			<div class="mb-3">
@@ -50,7 +51,9 @@
 			</div>
 			<div class="mb-3">
 				<label class="form-label" for="id">현재 영업 여부</label> 
-				<input class="form-check-input" type="checkbox" name="is_open" value= <%  shop.is_open === true ? 'checked' : '' %> />
+				<input class="form-check-input" type="checkbox" name="is_open" <% if (shop.is_open) { %>checked<% } %> />
+			</div>
+				
 			</div>
 			<div class="mb-3">
 				<label class="form-label" for="id">가게 주소</label> 
