@@ -13,7 +13,7 @@
     }
 %>
 
-<% if (shops !== undefined) {
+<% if (shops.length > 0) {
     for (let i = 0; i < shops.length; i += 2) { %>
         <div class="container">
             <div class="row" >
@@ -64,7 +64,7 @@
                     <% if (i + 1 < shops.length) { %>
                         <div class="shop-container">
                             <!-- 두 번째 상점 -->
-                            <img src="<%= shops[i + 1].image %>" style="width: 450px; height: 450px;  margin-bottom: 20px;">
+                            <img src="<%= shops[i + 1].image %>" style="width: 450px; height: 450px;">
                             <% if(!shops[i+1].is_open){ %>
                             <table class="table table-bordered" style="width: 450px;">
                                 <tr><td class="text-center" style="width: 100px; background-color: gray;">가게 이름</td><td class="text-center" style="background-color: gray;"><%= shops[i+1].name %></td></tr>
@@ -111,5 +111,7 @@
         </div>
     <% } %>
 <% } else { %>
-    자료없음
+    <div style="text-align: center; font-weight: bold;">
+        존재하는 가게가 없습니다.
+    </div>
 <% } %>

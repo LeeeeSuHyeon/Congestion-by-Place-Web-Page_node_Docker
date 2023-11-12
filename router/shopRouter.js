@@ -23,6 +23,12 @@ router.get('/view/:vu/:licence',(req, res)=>{
     shop.view(req, res);
 }); 
 
+// 시멘틱 url을 이용하여 (LC : category, location), (lc : 세부 장소 또는 세부 카테고리)
+router.get('/customerView/:LC/:lc',(req, res)=>{
+    shop.customerView(req, res);
+}); 
+
+
 router.get('/create',(req,res)=>{
     shop.create(req,res);
 })
