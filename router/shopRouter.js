@@ -1,4 +1,4 @@
-// 201935312 이수현 router/shop.js
+// 201935312 이수현 router/shopRouter.js
 
 const express = require('express');
 var router = express.Router()
@@ -34,6 +34,7 @@ router.get('/create',(req,res)=>{
 })
 
 router.post('/create_process',upload.single('uploadFile'),(req,res)=>{
+    
     var file = '/images/' + req.file.filename
     shop.create_process(req,res,file);
 })

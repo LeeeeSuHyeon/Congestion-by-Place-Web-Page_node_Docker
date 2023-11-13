@@ -20,90 +20,95 @@
                 <div class="col">
                     <!-- 첫 번째 상점 -->
                     <img src="<%= shops[i].image %>" style="width: 450px; height: 450px; margin-bottom: 20px;">
-                    <% if(!shops[i].is_open){ %>
-                        <table class="table table-bordered" style="width: 450px; " >
-                            <tr><td class="text-center" style="width: 100px; background-color: gray;">가게 이름</td><td class="text-center" style="background-color: gray;"> <%= shops[i].name %></td></tr>
-                            <tr><td class="text-center"style="background-color: gray;">위치</td><td class="text-center"  style="background-color: gray;"><%= shops[i].location %></td></tr>
-                            <tr><td class="text-center"style="background-color: gray;">카테고리</td><td class="text-center" style="background-color: gray;"><%= shops[i].category %></td></tr>
-                            <tr><td class="text-center"style="background-color: gray;">현재 인원</td> <td class="text-center" style="background-color: gray;"><%= shops[i].user %> / <%= shops[i].total_user %></td></tr>
-                            <tr>
-                                <td class="text-center" style="background-color: gray;">혼잡도</td> 
-                                <td style="background-color: gray;">
-                                    <div class="<%= getCircleColor(shops[i].user / shops[i].total_user) %>" style="margin: 0 auto !important;" ></div>
-                                </td>
-                            </tr>
-                            <tr><td class="text-center" style="background-color: gray;">영업 시간</td><td class="text-center" style="background-color: gray;"><%= shops[i].start_time %> ~ <%= shops[i].end_time %></td></tr>
-                            <tr><td class="text-center" style="background-color: gray;">영업 중</td><td class="text-center" style=" font-weight: bold; background-color: gray;"> <%= shops[i].is_open === 1 ? "영업 중" : "영업 종료"%></td></tr>
-                            <tr><td class="text-center" style="background-color: gray;">상세 주소</td><td class="text-center" style="background-color: gray;"><%= shops[i].address %></td></tr>
-                        </table>
-                    <%} else{%>
-                        <table class="table table-bordered" style="width: 450px; " >
-                            <tr><td class="text-center" style="width: 100px;">가게 이름</td><td class="text-center"> <%= shops[i].name %></td></tr>
-                            <tr><td class="text-center">위치</td><td class="text-center"><%= shops[i].location %></td></tr>
-                            <tr><td class="text-center">카테고리</td><td class="text-center"><%= shops[i].category %></td></tr>
-                            <tr><td class="text-center">현재 인원</td> <td class="text-center"><%= shops[i].user %> / <%= shops[i].total_user %></td></tr>
-                            <tr>
-                                <td class="text-center">혼잡도</td> 
-                                <td>
-                                    <div class="<%= getCircleColor(shops[i].user / shops[i].total_user) %>" style="margin: 0 auto !important;"></div>
-                                </td>
-                            </tr>
-                            <tr><td class="text-center">영업 시간</td><td class="text-center"><%= shops[i].start_time %> ~ <%= shops[i].end_time %></td></tr>
-                            <tr><td class="text-center">영업 중</td><td class="text-center"> <%= shops[i].is_open === 1 ? "영업 중" : "영업 종료"%></td></tr>
-                            <tr><td class="text-center">상세 주소</td><td class="text-center"><%= shops[i].address %></td></tr>
-                        </table>
-                    <% } %>
-                    <% if(update === 'YES'){ %>
-                        <div>
-                            <a href ="/shop/update/<%=shops[i].shop_id%>"><button>수정</button></a>
-                            <a href ="/shop/delete/<%=shops[i].shop_id%>" onclick="if (confirm('정말로 삭제하겠습니까?') == false) {return false;}" ><button>삭제</button></a>
-                        </div>
-                    <% } %>
+                    <div style="margin-bottom: 100px;">
+                        <% if(!shops[i].is_open){ %>
+                            <table class="table table-bordered" style="width: 450px;" >
+                                <tr><td class="text-center" style="width: 100px; background-color: gray;">가게 이름</td><td class="text-center" style="background-color: gray;"> <%= shops[i].name %></td></tr>
+                                <tr><td class="text-center"style="background-color: gray;">위치</td><td class="text-center"  style="background-color: gray;"><%= shops[i].location %></td></tr>
+                                <tr><td class="text-center"style="background-color: gray;">카테고리</td><td class="text-center" style="background-color: gray;"><%= shops[i].category %></td></tr>
+                                <tr><td class="text-center"style="background-color: gray;">현재 인원</td> <td class="text-center" style="background-color: gray;"><%= shops[i].user %> / <%= shops[i].total_user %></td></tr>
+                                <tr>
+                                    <td class="text-center" style="background-color: gray;">혼잡도</td> 
+                                    <td style="background-color: gray;">
+                                        <div class="<%= getCircleColor(shops[i].user / shops[i].total_user) %>" style="margin: 0 auto !important;" ></div>
+                                    </td>
+                                </tr>
+                                <tr><td class="text-center" style="background-color: gray;">영업 시간</td><td class="text-center" style="background-color: gray;"><%= shops[i].start_time %> ~ <%= shops[i].end_time %></td></tr>
+                                <tr><td class="text-center" style="background-color: gray;">영업 중</td><td class="text-center" style=" font-weight: bold; background-color: gray;"> <%= shops[i].is_open === 1 ? "영업 중" : "영업 종료"%></td></tr>
+                                <tr><td class="text-center" style="background-color: gray;">상세 주소</td><td class="text-center" style="background-color: gray;"><%= shops[i].address %></td></tr>
+                            </table>
+                        <%} else{%>
+                            <table class="table table-bordered" style="width: 450px;" >
+                                <tr><td class="text-center" style="width: 100px;">가게 이름</td><td class="text-center"> <%= shops[i].name %></td></tr>
+                                <tr><td class="text-center">위치</td><td class="text-center"><%= shops[i].location %></td></tr>
+                                <tr><td class="text-center">카테고리</td><td class="text-center"><%= shops[i].category %></td></tr>
+                                <tr><td class="text-center">현재 인원</td> <td class="text-center"><%= shops[i].user %> / <%= shops[i].total_user %></td></tr>
+                                <tr>
+                                    <td class="text-center">혼잡도</td> 
+                                    <td>
+                                        <div class="<%= getCircleColor(shops[i].user / shops[i].total_user) %>" style="margin: 0 auto !important;"></div>
+                                    </td>
+                                </tr>
+                                <tr><td class="text-center">영업 시간</td><td class="text-center"><%= shops[i].start_time %> ~ <%= shops[i].end_time %></td></tr>
+                                <tr><td class="text-center">영업 중</td><td class="text-center"> <%= shops[i].is_open === 1 ? "영업 중" : "영업 종료"%></td></tr>
+                                <tr><td class="text-center">상세 주소</td><td class="text-center"><%= shops[i].address %></td></tr>
+                            </table>
+                        <% } %>
+                        <% if(update === 'YES'){ %>
+                            <div>
+                                <a href ="/shop/update/<%=shops[i].shop_id%>"><button>수정</button></a>
+                                <a href ="/shop/delete/<%=shops[i].shop_id%>" onclick="if (confirm('정말로 삭제하겠습니까?') == false) {return false;}" ><button>삭제</button></a>
+                            </div>
+                        <% } %>
+                    </div>
+                   
                 </div>
                 <div class ="col">
                     <% if (i + 1 < shops.length) { %>
                         <div class="shop-container">
                             <!-- 두 번째 상점 -->
-                            <img src="<%= shops[i + 1].image %>" style="width: 450px; height: 450px;">
-                            <% if(!shops[i+1].is_open){ %>
-                            <table class="table table-bordered" style="width: 450px;">
-                                <tr><td class="text-center" style="width: 100px; background-color: gray;">가게 이름</td><td class="text-center" style="background-color: gray;"><%= shops[i+1].name %></td></tr>
-                                <tr><td class="text-center" style="background-color: gray;">위치</td><td class="text-center" style="background-color: gray;"><%= shops[i+1].location %></td></tr>
-                                <tr><td class="text-center" style="background-color: gray;">카테고리</td><td class="text-center" style="background-color: gray;"><%= shops[i+1].category %></td></tr>
-                                <tr><td class="text-center" style="background-color: gray;">현재 인원</td> <td class="text-center" style="background-color: gray;"><%= shops[i+1].user %> / <%= shops[i+1].total_user %></td></tr>
-                                <tr>
-                                    <td class="text-center" style="background-color: gray;">혼잡도</td> 
-                                    <td style="background-color: gray;">
-                                        <div class="<%= getCircleColor(shops[i+1].user / shops[i+1].total_user) %>" style="margin: 0 auto !important;"></div>
-                                    </td>
-                                </tr>
-                                <tr><td class="text-center" style="background-color: gray;">영업시간</td><td class="text-center" style="background-color: gray;"><%= shops[i+1].start_time %> ~ <%= shops[i+1].end_time %></td></tr>
-                                <tr><td class="text-center" style="background-color: gray;">영업 중</td><td class="text-center" style=" font-weight: bold; background-color: gray;"> <%= shops[i+1].is_open === 1 ? "영업 중" : "영업 종료"%></td></tr>
-                                <tr><td class="text-center" style="background-color: gray;">상세 주소</td><td class="text-center" style="background-color: gray;"><%= shops[i+1].address %></td></tr>
-                            </table>
-                            <%} else{ %> 
-                            <table class="table table-bordered" style="width: 450px;">
-                                <tr><td class="text-center" style="width: 100px;">가게 이름</td><td class="text-center"><%= shops[i+1].name %></td></tr>
-                                <tr><td class="text-center">위치</td><td class="text-center"><%= shops[i+1].location %></td></tr>
-                                <tr><td class="text-center">카테고리</td><td class="text-center"><%= shops[i+1].category %></td></tr>
-                                <tr><td class="text-center">현재 인원</td> <td class="text-center"><%= shops[i+1].user %> / <%= shops[i+1].total_user %></td></tr>
-                                <tr>
-                                    <td class="text-center">혼잡도</td> 
-                                    <td>
-                                        <div class="<%= getCircleColor(shops[i+1].user / shops[i+1].total_user) %>" style="margin: 0 auto !important;"></div>
-                                    </td>
-                                </tr>
-                                <tr><td class="text-center">영업시간</td><td class="text-center"><%= shops[i+1].start_time %> ~ <%= shops[i+1].end_time %></td></tr>
-                                <tr><td class="text-center">영업 중</td><td class="text-center"> <%= shops[i+1].is_open === 1 ? "영업 중" : "영업 종료"%></td></tr>
-                                <tr><td class="text-center">상세 주소</td><td class="text-center"><%= shops[i+1].address %></td></tr>
-                            </table>
-                            <% } %>
-                            <% if(update === 'YES'){ %>
-                                <div>
-                                    <a href ="/shop/update/<%=shops[i+1].shop_id%>"><button>수정</button></a>
-                                    <a href ="/shop/delete/<%=shops[i+1].shop_id%>" onclick="if (confirm('정말로 삭제하겠습니까?') == false) {return false;}" ><button>삭제</button></a>
-                                </div>
-                            <% } %>
+                            <img src="<%= shops[i + 1].image %>" style="width: 450px; height: 450px; margin-bottom: 20px;">
+                            <div style="margin-bottom: 100px;">
+                                <% if(!shops[i+1].is_open){ %>
+                                    <table class="table table-bordered" style="width: 450px;">
+                                        <tr><td class="text-center" style="width: 100px; background-color: gray;">가게 이름</td><td class="text-center" style="background-color: gray;"><%= shops[i+1].name %></td></tr>
+                                        <tr><td class="text-center" style="background-color: gray;">위치</td><td class="text-center" style="background-color: gray;"><%= shops[i+1].location %></td></tr>
+                                        <tr><td class="text-center" style="background-color: gray;">카테고리</td><td class="text-center" style="background-color: gray;"><%= shops[i+1].category %></td></tr>
+                                        <tr><td class="text-center" style="background-color: gray;">현재 인원</td> <td class="text-center" style="background-color: gray;"><%= shops[i+1].user %> / <%= shops[i+1].total_user %></td></tr>
+                                        <tr>
+                                            <td class="text-center" style="background-color: gray;">혼잡도</td> 
+                                            <td style="background-color: gray;">
+                                                <div class="<%= getCircleColor(shops[i+1].user / shops[i+1].total_user) %>" style="margin: 0 auto !important;"></div>
+                                            </td>
+                                        </tr>
+                                        <tr><td class="text-center" style="background-color: gray;">영업시간</td><td class="text-center" style="background-color: gray;"><%= shops[i+1].start_time %> ~ <%= shops[i+1].end_time %></td></tr>
+                                        <tr><td class="text-center" style="background-color: gray;">영업 중</td><td class="text-center" style=" font-weight: bold; background-color: gray;"> <%= shops[i+1].is_open === 1 ? "영업 중" : "영업 종료"%></td></tr>
+                                        <tr><td class="text-center" style="background-color: gray;">상세 주소</td><td class="text-center" style="background-color: gray;"><%= shops[i+1].address %></td></tr>
+                                    </table>
+                                    <%} else{ %> 
+                                    <table class="table table-bordered" style="width: 450px;">
+                                        <tr><td class="text-center" style="width: 100px;">가게 이름</td><td class="text-center"><%= shops[i+1].name %></td></tr>
+                                        <tr><td class="text-center">위치</td><td class="text-center"><%= shops[i+1].location %></td></tr>
+                                        <tr><td class="text-center">카테고리</td><td class="text-center"><%= shops[i+1].category %></td></tr>
+                                        <tr><td class="text-center">현재 인원</td> <td class="text-center"><%= shops[i+1].user %> / <%= shops[i+1].total_user %></td></tr>
+                                        <tr>
+                                            <td class="text-center">혼잡도</td> 
+                                            <td>
+                                                <div class="<%= getCircleColor(shops[i+1].user / shops[i+1].total_user) %>" style="margin: 0 auto !important;"></div>
+                                            </td>
+                                        </tr>
+                                        <tr><td class="text-center">영업시간</td><td class="text-center"><%= shops[i+1].start_time %> ~ <%= shops[i+1].end_time %></td></tr>
+                                        <tr><td class="text-center">영업 중</td><td class="text-center"> <%= shops[i+1].is_open === 1 ? "영업 중" : "영업 종료"%></td></tr>
+                                        <tr><td class="text-center">상세 주소</td><td class="text-center"><%= shops[i+1].address %></td></tr>
+                                    </table>
+                                    <% } %>
+                                    <% if(update === 'YES'){ %>
+                                        <div>
+                                            <a href ="/shop/update/<%=shops[i+1].shop_id%>"><button>수정</button></a>
+                                            <a href ="/shop/delete/<%=shops[i+1].shop_id%>" onclick="if (confirm('정말로 삭제하겠습니까?') == false) {return false;}" ><button>삭제</button></a>
+                                        </div>
+                                    <% } %>
+                            </div>
                         </div>
                     <% } %>
                 </div>

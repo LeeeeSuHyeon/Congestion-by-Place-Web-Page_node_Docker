@@ -8,22 +8,23 @@
             $(".upload-name").val(fileName);
         }
     </script>
-    <h2>가게 등록</h2>
+    
 
 	<% if (shop !== null){ %>
+		<h2>가게 수정</h2>
 		<form action="/shop/update_process" method="post" enctype="multipart/form-data">
 			<input type="hidden" name = shop_id value="<%= shop.shop_id%>" />
 			<div class="mb-3">
-				<label class="form-label" for="id">위치</label> 
-				<select name = "location" id = "id">
+				<label class="form-label" for="location_id">위치</label> 
+				<select name = "location" id = "location_id">
 					<option value="교내" <% if (shop.location === '교내') { %>selected<% } %>>교내</option>
 					<option value="태평동" <% if (shop.location === '태평동') { %>selected<% } %>>태평동</option>
 					<option value="복정동" <% if (shop.location === '복정동') { %>selected<% } %>>복정동</option>
 				</select>
 			</div>
 			<div class="mb-3">
-				<label class="form-label" for="id">카테고리</label> 
-				<select name = "category" id = "id">
+				<label class="form-label" for="category_id">카테고리</label> 
+				<select name = "category" id = "category_id">
 					<option value="음식점" <% if (shop.category === '음식점') { %>selected<% } %>>음식점</option>
 					<option value="카페" <% if (shop.category === '카페') { %>selected<% } %>>카페</option>
 					<option value="헬스장" <% if (shop.category === '헬스장') { %>selected<% } %>>헬스장</option>
@@ -69,19 +70,20 @@
 	  </form>
 	<% } 
 	else { %>
+		<h2>가게 등록</h2>
 		<form action="/shop/create_process" method="post" enctype="multipart/form-data">
 
 			<div class="mb-3">
-				<label class="form-label" for="id">위치</label> 
-				<select name = "location" id = "id">
+				<label class="form-label" for="location_id">위치</label> 
+				<select name = "location" id = "location_id">
 					<option value="교내">교내</option>
 					<option value="태평동">태평동</option>
 					<option value="복정동">복정동</option>
 				</select>
 			</div>
 			<div class="mb-3">
-				<label class="form-label" for="id">카테고리</label> 
-				<select name = "category" id = "id">
+				<label class="form-label" for="category_id">카테고리</label> 
+				<select name = "category" id = "category_id">
 					<option value="음식점" >음식점</option>
 					<option value="카페" >카페</option>
 					<option value="헬스장" >헬스장</option>
