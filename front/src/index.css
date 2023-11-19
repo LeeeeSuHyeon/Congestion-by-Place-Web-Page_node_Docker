@@ -11,3 +11,45 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+
+.circle-green {
+  background-color: green;
+  color: white;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  margin-left: 155px;
+  border: 2px solid grey;
+}
+
+.circle-yellow {
+  background-color: yellow;
+  color: black;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  margin-left: 155px;
+  border: 2px solid grey;
+}
+
+.circle-red {
+  background-color: red;
+  color: white;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  margin-left: 155px;
+  border: 2px solid grey;
+}
+
+.circle-black {
+  background-color: black;
+  color: white;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  margin-left: 155px;
+  border: 2px solid grey;
+}
+

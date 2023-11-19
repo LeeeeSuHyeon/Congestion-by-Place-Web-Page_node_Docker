@@ -1,7 +1,12 @@
 const express = require("express");
 const app = express();
+const cors = require('cors');
 app.set('views', __dirname +'/views');
 app.set('view engine', 'ejs');
+
+// CORS 설정
+app.use(cors());
+
 
 // 포트 번호를 환경 변수로 설정하고, 기본값은 7080로 지정
 const port = process.env.PORT || 7080;

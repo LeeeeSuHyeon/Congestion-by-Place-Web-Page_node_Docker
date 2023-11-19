@@ -7,35 +7,22 @@ function authIsOwner(req, res){
     else{return false}
 }
 
+
 module.exports = {
-    home : (req,res) =>{
+    home: (req, res) => {
         var isOwner = authIsOwner(req, res);
-        if(isOwner){
-            db.query("select * from shop", (err, results) => {
-                var context = {
-                    menu: 'menuForMember.ejs',
-                    body: 'shop.ejs',
-                    shops : results,
-                    name : req.session.name,
-                    licence : req.session.licence,
-                    update : 'NO'
-                }
-    
-                res.json(context)
-                
-            })
-        }
+        var menuType = isOwner ? 'menuForMember.ejs' : 'menuForCustomer.ejs';
+
         db.query("select * from shop", (err, results) => {
             var context = {
-                menu: 'menuForCustomer.ejs',
+                menu: menuType,
                 body: 'shop.ejs',
-                shops : results,
-                update : 'NO'
-            }
-
-            res.json(context)
-            
-        })
-        
+                shops: results,
+                name: req.session.name,
+                licence: req.session.licence,
+                update: 'NO'
+            };
+            res.json(context);
+        });
     }
-}
+};
