@@ -2,12 +2,13 @@
 var db = require('./db');
 var sanitizeHtml = require('sanitize-html');
 var session = require('express-session')
+var url = require('url');
 
 module.exports = {
     login : (req, res)=>{
         var context = {
-            menu : "menuForCustomer.ejs",
-            body : 'login.ejs',
+            menu : "menuForCustomer",
+            body : 'login',
         };
         res.json(context)
     }, // end of login
@@ -27,7 +28,23 @@ module.exports = {
                     req.session.is_logined = true;
                     req.session.name = result[0].name
                     req.session.licence = result[0].licence
-                    res.redirect('/');
+                    db.query("select * from shop", (err, results) => {
+                        var context = {
+                            menu: 'menuForMember',
+                            body: 'shop',
+                            shops: results,
+                            name: req.session.name,
+                            licence: req.session.licence,
+                            update: 'NO'
+                        };
+                        res.redirect(url.format({
+                            pathname: 'http://192.168.64.8:3000/',
+                            query : context
+                        }));
+                    });
+                   
+                    
+                
                 })
             }
             else{
@@ -36,21 +53,21 @@ module.exports = {
                 req.session.class = '000';
                 
                 // 로그인에 실패하면 알림창 띄우고 다시 로그인 페이지로 이동 
-                res.end(`<script type='text/javascript'>alert("ID or password is incorrect."); location.href = 'http://192.168.64.8:7080/auth/login'; </script>`)
+                res.end(`<script type='text/javascript'>alert("ID or password is incorrect."); location.href = 'http://192.168.64.8:3000/auth/login'; </script>`)
             }
         })
     }, // end of login_process
 
     logout_process : (req, res)=>{
         req.session.destroy((err)=>{
-            res.redirect('/');
+            res.redirect('http//192.168.64.8:3000/');
         })
     }, // end of logout_process
 
     register : (req, res) =>{
         var context = {
-            menu : "menuForCustomer.ejs",
-            body : 'register.ejs',
+            menu : "menuForCustomer",
+            body : 'register',
         };
         res.json(context)
     }, // end of register 
@@ -66,7 +83,7 @@ module.exports = {
                 // 회원가입 완료되면 알림 띄우기
                 res.end(`<script type='text/javascript'>alert("Registration is complete! Please log in")
                 <!--
-                  setTimeout("location.href='http://192.168.64.8:7080/auth/login'", 1000);
+                  setTimeout("location.href='http://192.168.64.8:3000/auth/login'", 1000);
                 //-->
                   </script>`)
             }

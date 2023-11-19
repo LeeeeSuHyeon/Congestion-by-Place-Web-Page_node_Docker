@@ -18,10 +18,10 @@ module.exports = {
             if(isOwner){
                 db.query("select * from shop where businessperson_licence = ?",[licence], (err, results)=>{
                     var context = {
-                        menu : "menuForMember.ejs",
+                        menu : "menuForMember",
                         name : req.session.name,
                         licence : req.session.licence,
-                        body : 'shop.ejs',
+                        body : 'shop',
                         shops : results || [], 
                         update : 'NO'
                     };
@@ -29,15 +29,15 @@ module.exports = {
                 })
             }
             else{
-                res.end(`<script type='text/javascript'>alert("Login Please."); location.href = '/auth/login'; </script>`)
+                res.end(`<script type='text/javascript'>alert("Login Please."); location.href = 'http://192.168.64.8:3000/auth/login'; </script>`)
             }
         }
         else if(vu === "u"){
             if(isOwner){
                 db.query("select * from shop where businessperson_licence = ?",[licence], (err, results)=>{
                     var context = {
-                        menu : "menuForMember.ejs",
-                        body : 'shop.ejs',
+                        menu : "menuForMember",
+                        body : 'shop',
                         shops : results || [], 
                         name : req.session.name,
                         licence : req.session.licence,
@@ -65,8 +65,8 @@ module.exports = {
                 if(err){console.log(err)}
                 console.log(results)
                 var context= {
-                    menu : "menuForCustomer.ejs",
-                    body : 'shop.ejs',
+                    menu : "menuForCustomer",
+                    body : 'shop',
                     shops : results,
                     update : 'NO'
                 }
@@ -78,8 +78,8 @@ module.exports = {
                 if(err){console.log(err)}
                 console.log(results)
                 var context= {
-                    menu : "menuForCustomer.ejs",
-                    body : 'shop.ejs',
+                    menu : "menuForCustomer",
+                    body : 'shop',
                     shops : results,
                     update : 'NO'
                 }
@@ -94,10 +94,10 @@ module.exports = {
         var isOwner = authIsOwner(req, res);
         if(isOwner){
             var context = {
-                menu: "menuForMember.ejs",
+                menu: "menuForMember",
                 name : req.session.name,
                 licence : req.session.licence,
-                body: 'shopCU.ejs',
+                body: 'shopCU',
                 shop: null,
             }
             res.json(context)
@@ -114,7 +114,7 @@ module.exports = {
                     ,[post.location, post.category, post.name, post.total_user, post.user, post.start_time, post.end_time, post.is_open, post.address, req.session.licence],(err, result)=>{
                     if(err){console.log(err)}
                     else{
-                        res.writeHead(302, {Location: `/shop/view/v/${req.session.licence}`});
+                        res.writeHead(302, {Location: `192.168.64.8:3000/shop/view/v/${req.session.licence}`});
                         res.end();
                     }
                     }
@@ -126,7 +126,7 @@ module.exports = {
                     ,[post.location, post.category, post.name, post.total_user, post.user, post.start_time, post.end_time, post.is_open, post.address, file, req.session.licence],(err, result)=>{
                     if(err){console.log(err)}
                     else{
-                        res.writeHead(302, {Location: `/shop/view/v/${req.session.licence}`});
+                        res.writeHead(302, {Location: `192.168.64.8:3000/shop/view/v/${req.session.licence}`});
                         res.end();
                     }
                     }
@@ -144,10 +144,10 @@ module.exports = {
             db.query('select * from shop where shop_id = ?',[id], (err, result)=>{
 
                 var context = {
-                    menu: "menuForMember.ejs",
+                    menu: "menuForMember",
                     name : req.session.name,
                     licence : req.session.licence,
-                    body: 'shopCU.ejs',
+                    body: 'shopCU',
                     shop: result[0],
                 }
                 res.json(context)
@@ -166,7 +166,7 @@ module.exports = {
                 [post.location, post.category, post.name, post.total_user, post.user, post.start_time, post.end_time, post.is_open, post.address, post.shop_id], (err, results)=>{
                     if(err){console.log(err)}
                     else{
-                        res.writeHead(302, {Location: `/shop/view/u/${req.session.licence}`});
+                        res.writeHead(302, {Location: `192.168.64.8:3000/shop/view/u/${req.session.licence}`});
                         res.end();
                     }
                    
@@ -177,7 +177,7 @@ module.exports = {
                 [post.location, post.category, post.name, post.total_user, post.user, post.start_time, post.end_time, post.is_open, post.address, file, post.shop_id], (err, results)=>{
                     if(err){console.log(err)}
                     else{
-                        res.writeHead(302, {Location: `/shop/view/u/${req.session.licence}`});
+                        res.writeHead(302, {Location: `192.168.64.8:3000/shop/view/u/${req.session.licence}`});
                         res.end();
                     }
                    
@@ -191,7 +191,7 @@ module.exports = {
         db.query('DELETE FROM shop WHERE shop_id = ?', [id], (error, result) => { 
             if(error) { throw error; }
             else{
-                res.writeHead(302, {Location: `/shop/view/u/${req.session.licence}`});
+                res.writeHead(302, {Location: `192.168.64.8:3000/shop/view/u/${req.session.licence}`});
                 res.end();
             }
         });

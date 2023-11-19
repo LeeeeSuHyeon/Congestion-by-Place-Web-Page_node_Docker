@@ -4,7 +4,7 @@ const Register = () => {
   return (
     <div className="container">
       <h2>사업자 등록</h2>
-      <form action="/auth/register_process" method="post">
+      <form action="http://192.168.64.8:7080/auth/register_process" method="post">
         <div className="mb-3">
           <label className="form-label" htmlFor="id">
             아이디

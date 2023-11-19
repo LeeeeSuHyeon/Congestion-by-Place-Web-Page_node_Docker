@@ -15,17 +15,40 @@ const App = () => {
   const [loginInfo, setLoginInfo] = useState(false);
   const [data, setData] = useState([]);
   const [shopsData, setShopsData] = useState(null); // 새로운 state 변수 추가
+  const [name, setName] = useState('');
+  const [licence, setLicence] = useState('');
   
 
   // 서버로부터 홈 정보를 가져오는 비동기 함수
   const fetchLoginInfo = async () => {
     try {
-      const response = await fetch(url + '/'); // 서버에서 로그인 정보를 얻는 엔드포인트 경로에 맞게 수정
-      const data = await response.json();
-      console.log(data);
-      setData(data);
-      setLoginInfo(data.menu === 'menuForMember.ejs');
-      setShopsData(data.shops); // 받아온 가게 데이터를 state에 저장
+      const urlParams = new URLSearchParams(window.location.search);
+      if(urlParams.has('menu')){
+        const data = {
+          menu: urlParams.get('menu'),
+          shops: urlParams.get('shops'),
+          body : urlParams.get('body'),
+          name : urlParams.get('name'),
+          licence : urlParams.get('licence'),
+          update : urlParams.get('update'),
+        }
+
+        console.log(data.shops)
+        setData(data.shops);
+        setLoginInfo(data.menu === 'menuForMember');
+        setShopsData(data.shops);
+        setName(data.name)
+        setLicence(data.licence)
+      }
+      else{
+        const response = await fetch(url + '/'); // 서버에서 로그인 정보를 얻는 엔드포인트 경로에 맞게 수정
+        const data = await response.json();
+        console.log(data);
+        setData(data);
+        setLoginInfo(data.menu === 'menuForMember');
+        setShopsData(data.shops); // 받아온 가게 데이터를 state에 저장
+      }
+
     } catch (error) {
       console.error('Error fetching login info:', error);
     }
@@ -38,7 +61,7 @@ const App = () => {
       const data = await response.json();
       console.log(data);
       setData(data);
-      setLoginInfo(data.menu === 'menuForMember.ejs');
+      setLoginInfo(data.menu === 'menuForMember');
     } catch (error) {
       console.error('Error fetching login info:', error);
     }
@@ -62,7 +85,7 @@ const App = () => {
   return (
     <>
       <div style={{ paddingTop: '90px' }}>
-        {loginInfo ? <MemberMenu /> : <CustomerMenu /> }
+        {loginInfo ? <MemberMenu name={name} licence = {licence}/> : <CustomerMenu /> }
 
         {currentPath === '/' ? 
         (

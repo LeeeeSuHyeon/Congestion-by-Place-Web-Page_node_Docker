@@ -4,7 +4,7 @@ const Login = () => {
   return (
     <div className="container">
       <h2>사업자 로그인</h2>
-      <form action="/auth/login_process" method="post">
+      <form action="http://192.168.64.8:7080/auth/login_process" method="post">
         <div className="mb-3">
           <label className="form-label" htmlFor="id">아이디</label>
           <input className="form-control" type="text" name="id" id="id" style={{ width: '300px' }} />
