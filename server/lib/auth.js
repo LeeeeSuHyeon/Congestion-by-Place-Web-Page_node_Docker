@@ -7,13 +7,9 @@ module.exports = {
     login : (req, res)=>{
         var context = {
             menu : "menuForCustomer.ejs",
-            // who : '손님',
             body : 'login.ejs',
-            // logined : 'NO'
         };
-        req.app.render('home', context, (err, html)=>{
-            res.end(html);
-        })
+        res.json(context)
     }, // end of login
 
     login_process : (req, res)=>{
@@ -38,10 +34,9 @@ module.exports = {
                 req.session.is_logined = false;
                 req.session.name = '손님';
                 req.session.class = '000';
-                // res.redirect('/');
                 
                 // 로그인에 실패하면 알림창 띄우고 다시 로그인 페이지로 이동 
-                res.end(`<script type='text/javascript'>alert("ID or password is incorrect."); location.href = '/auth/login'; </script>`)
+                res.end(`<script type='text/javascript'>alert("ID or password is incorrect."); location.href = 'http://192.168.64.8:7080/auth/login'; </script>`)
             }
         })
     }, // end of login_process
@@ -56,11 +51,8 @@ module.exports = {
         var context = {
             menu : "menuForCustomer.ejs",
             body : 'register.ejs',
-            // logined : 'NO'
         };
-        req.app.render('home', context, (err, html)=>{
-            res.end(html);
-        })
+        res.json(context)
     }, // end of register 
 
     register_process : (req, res) =>{

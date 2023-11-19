@@ -21,9 +21,7 @@ module.exports = {
                     update : 'NO'
                 }
     
-                req.app.render('home', context, (err,html)=>{
-                    res.end(html);
-                });
+                res.json(context)
                 
             })
         }
@@ -35,9 +33,7 @@ module.exports = {
                 update : 'NO'
             }
 
-            req.app.render('home', context, (err,html)=>{
-                res.end(html);
-            });
+            res.json(context)
             
         })
         

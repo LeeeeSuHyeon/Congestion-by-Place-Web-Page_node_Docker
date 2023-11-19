@@ -21,15 +21,11 @@ module.exports = {
                         menu : "menuForMember.ejs",
                         name : req.session.name,
                         licence : req.session.licence,
-                        // who : req.session.name,
                         body : 'shop.ejs',
-                        // logined : req.session.is_logined ? 'YES' : 'NO',
                         shops : results || [], 
                         update : 'NO'
                     };
-                    req.app.render('home', context, (err, html)=>{
-                        res.end(html);
-                    })
+                    res.json(context)
                 })
             }
             else{
@@ -41,18 +37,14 @@ module.exports = {
                 db.query("select * from shop where businessperson_licence = ?",[licence], (err, results)=>{
                     var context = {
                         menu : "menuForMember.ejs",
-                        // who : req.session.name,
                         body : 'shop.ejs',
-                        // logined : req.session.is_logined ? 'YES' : 'NO',
                         shops : results || [], 
                         name : req.session.name,
                         licence : req.session.licence,
                         update : 'YES'
                     };
         
-                    req.app.render('home', context, (err, html)=>{
-                        res.end(html);
-                    })
+                    res.json(context)
     
                 })
             }
@@ -78,9 +70,7 @@ module.exports = {
                     shops : results,
                     update : 'NO'
                 }
-                req.app.render('home', context, (err, html)=>{
-                    res.end(html);
-                })
+                res.json(context)
             })
         }
         else{
@@ -93,9 +83,7 @@ module.exports = {
                     shops : results,
                     update : 'NO'
                 }
-                req.app.render('home', context, (err, html)=>{
-                    res.end(html);
-                })
+                res.json(context)
             })
         }
        
@@ -112,9 +100,7 @@ module.exports = {
                 body: 'shopCU.ejs',
                 shop: null,
             }
-            req.app.render('home', context, (err, html)=>{
-                res.end(html);
-            })
+            res.json(context)
         }
     },
 
@@ -161,14 +147,10 @@ module.exports = {
                     menu: "menuForMember.ejs",
                     name : req.session.name,
                     licence : req.session.licence,
-                    // who: req.session.name,
                     body: 'shopCU.ejs',
-                    // logined: req.session.is_logined ? 'YES' : 'NO',
                     shop: result[0],
                 }
-                req.app.render('home', context, (err, html)=>{
-                    res.end(html);
-                })
+                res.json(context)
             })
         }
     },
