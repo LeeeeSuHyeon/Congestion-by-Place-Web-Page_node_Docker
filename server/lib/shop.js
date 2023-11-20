@@ -86,8 +86,6 @@ module.exports = {
                 res.json(context)
             })
         }
-       
-        
     },
 
     create : (req, res) =>{

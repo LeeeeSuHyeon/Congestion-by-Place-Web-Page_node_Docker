@@ -37,14 +37,8 @@ module.exports = {
                             licence: req.session.licence,
                             update: 'NO'
                         };
-                        res.redirect(url.format({
-                            pathname: 'http://192.168.64.8:3000/',
-                            query : context
-                        }));
+                        res.json(context);
                     });
-                   
-                    
-                
                 })
             }
             else{
