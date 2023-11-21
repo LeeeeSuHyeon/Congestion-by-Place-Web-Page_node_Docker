@@ -1,7 +1,18 @@
 // MemberMenu.js 
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 
-const MemberMenu = ({ name, licence }) => {
+const MemberMenu = ({name, licence, setLoginInfo}) => {
+  const navigate = useNavigate();
+
+
+  const handleLogout = () => {
+    if (window.confirm('로그아웃 하시겠습니까?')) {
+      setLoginInfo(false);
+      navigate('/login');
+    }
+  };
+
   return (
     <nav className="navbar navbar-expand-lg navbar-dark fixed-top" style={{ backgroundColor: '#4facee' }}>
       <div className="container-fluid">
@@ -28,10 +39,9 @@ const MemberMenu = ({ name, licence }) => {
               </li>
               <li className="nav-item">
                 <a className="nav-link" href="/auth/logout_process" style={{ color: '#4facee', backgroundColor: 'white' }}
-                  onClick={() => {
-                    if (window.confirm('로그아웃 하시겠습니까?')) {
-                      // 로그아웃 처리
-                    }
+                  onClick={(e) => {
+                    e.preventDefault();
+                    handleLogout();
                   }}>
                   로그아웃
                 </a>

@@ -17,7 +17,6 @@ const currentPath = window.location.pathname;
 const App = () => {
   const [loginInfo, setLoginInfo] = useState(false);
   const [data, setData] = useState([]);
-  const [shopsData, setShopsData] = useState(null);
   const [maxShopId, setMaxShopId] = useState(0);
 
   // 서버로부터 홈 정보를 가져오는 비동기 함수
@@ -25,7 +24,7 @@ const App = () => {
     try {
       const response = await fetch(url + '/'); // 서버에서 로그인 정보를 얻는 엔드포인트 경로에 맞게 수정
       const data = await response.json();
-      console.log(data);
+      console.log('fetchLoginInfo : ', data);
 
       // shop_id 값이 들어있는 배열 생성
       const shopIds = data.shops.map((shop) => shop.shop_id);
@@ -33,7 +32,6 @@ const App = () => {
       setData(data);
       setMaxShopId(Math.max(...shopIds)); // shop_id의 최댓값 추출
       setLoginInfo(data.menu === 'menuForMember');
-      setShopsData(data.shops); // 받아온 가게 데이터를 state에 저장
     } catch (error) {
       console.error('Error fetching login info:', error);
     }
@@ -58,7 +56,6 @@ const App = () => {
       if (response.ok) {
         const data = await response.json();
         setData(data);
-        setShopsData(data.shops); // 받아온 가게 데이터를 state에 저장
         console.log(data);
       } else {
         console.error('Error fetching data:', response.status, response.statusText);
@@ -74,7 +71,6 @@ const App = () => {
       if (response.ok) {
         const data = await response.json();
         setData(data);
-        setShopsData(data.shops);
         console.log(data);
       } else {
         console.error('Error fetching data:', response.status, response.statusText);
@@ -104,52 +100,50 @@ const App = () => {
     };
 
     fetchData();
-  }, [currentPath]);
+  }, []);
 
   return (
     <Router>
       <div style={{ paddingTop: '90px' }}>
         {loginInfo ? (
-          <MemberMenu name={data.name} licence={data.licence} />
+          <MemberMenu name={data.name} licence={data.licence} setLoginInfo={setLoginInfo} />
         ) : (
           <CustomerMenu />
         )}
 
         <Routes>
-          <Route path="/" element={!loginInfo ? (
+          <Route path="/" element={
             <div className="container">
-              <ShopInfo shops={shopsData} update={data.update} />
+              <ShopInfo shops={data.shops} update={data.update} />
             </div>
-          ) : (
-            <Navigate to="/auth/login" />
-          )} />
+          } />
           <Route path="/auth/login" element={!loginInfo ? (
             <div className="container">
               <Login setData={setData} setLoginInfo={setLoginInfo} />
             </div>
-          ) : (
-            <Navigate to="/" />
+            ) : (
+              <Navigate to="/" />
           )} />
           <Route path="/auth/register" element={!loginInfo ? (
             <div className="container">
               <Register />
             </div>
-          ) : (
-            <Navigate to="/" />
+            ) : (
+              <Navigate to="/" />
           )} />
           <Route path="/create" element={loginInfo ? (
             <div className="container">
-              <ShopCU shops={shopsData} update={data.update} />
+              <ShopCU shops={data.shops} update={data.update} />
             </div>
-          ) : (
-            <Navigate to="/auth/login" />
+            ) : (
+              <Navigate to="/auth/login" />
           )} />
           <Route path="/update" element={loginInfo ? (
             <div className="container">
-              <ShopCU shops={shopsData} update={data.update} />
+              <ShopCU shops={data.shops} update={data.update} />
             </div>
-          ) : (
-            <Navigate to="/auth/login" />
+            ) : (
+              <Navigate to="/auth/login" />
           )} />
         </Routes>
       </div>
