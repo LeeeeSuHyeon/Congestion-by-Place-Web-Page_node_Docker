@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 
-const Login = (setData, setLoginInfo) => {
+const Login = ({setData, setLoginInfo}) => {
   const [id, setId] = useState('');
   const [pwd, setPwd] = useState('');
 
