@@ -34,7 +34,7 @@ app.use(session({
 
 // body-parser 모듈 
 var bodyParser = require('body-parser');
-app.use(bodyParser.urlencoded({extended: false}));
+app.use(bodyParser.json());
 
 
 // 사용자 정의 모듈 

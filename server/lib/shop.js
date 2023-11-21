@@ -18,6 +18,7 @@ module.exports = {
             if(isOwner){
                 db.query("select * from shop where businessperson_licence = ?",[licence], (err, results)=>{
                     var context = {
+                        success : true,
                         menu : "menuForMember",
                         name : req.session.name,
                         licence : req.session.licence,
@@ -29,13 +30,19 @@ module.exports = {
                 })
             }
             else{
-                res.end(`<script type='text/javascript'>alert("Login Please."); location.href = 'http://192.168.64.8:3000/auth/login'; </script>`)
+                var context ={
+                    success : false,
+                    message : 'Login Please',
+                }
+                res.json(context)
+                // res.end(`<script type='text/javascript'>alert("Login Please."); location.href = 'http://192.168.64.8:3000/auth/login'; </script>`)
             }
         }
         else if(vu === "u"){
             if(isOwner){
                 db.query("select * from shop where businessperson_licence = ?",[licence], (err, results)=>{
                     var context = {
+                        success : true,
                         menu : "menuForMember",
                         body : 'shop',
                         shops : results || [], 
@@ -65,6 +72,7 @@ module.exports = {
                 if(err){console.log(err)}
                 console.log(results)
                 var context= {
+                    success : true,
                     menu : "menuForCustomer",
                     body : 'shop',
                     shops : results,
@@ -78,6 +86,7 @@ module.exports = {
                 if(err){console.log(err)}
                 console.log(results)
                 var context= {
+                    success : true,
                     menu : "menuForCustomer",
                     body : 'shop',
                     shops : results,
@@ -92,6 +101,7 @@ module.exports = {
         var isOwner = authIsOwner(req, res);
         if(isOwner){
             var context = {
+                success : true,
                 menu: "menuForMember",
                 name : req.session.name,
                 licence : req.session.licence,
@@ -142,6 +152,7 @@ module.exports = {
             db.query('select * from shop where shop_id = ?',[id], (err, result)=>{
 
                 var context = {
+                    success : true,
                     menu: "menuForMember",
                     name : req.session.name,
                     licence : req.session.licence,
