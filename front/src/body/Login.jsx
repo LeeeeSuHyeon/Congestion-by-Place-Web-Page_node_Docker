@@ -28,10 +28,8 @@ const Login = ({setData, setLoginInfo}) => {
           // 로그인 성공
           setData(data);
           setLoginInfo(data.menu === 'menuForMember');
-          if (data.isLoginSuccessful) {
-            // 리디렉션
-            window.location.href = 'http://192.168.64.8:3000';
-          }
+          window.location.href = 'http://192.168.64.8:3000';
+        
         } else {
           // 로그인 실패
           alert(data.message); // 실패 메시지를 알림으로 표시

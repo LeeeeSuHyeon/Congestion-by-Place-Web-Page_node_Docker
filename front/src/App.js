@@ -1,6 +1,7 @@
 // App.js
 
 import React, { useState, useEffect } from 'react';
+import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
 import CustomerMenu from './menu/CustomerMenu';
 import MemberMenu from './menu/MemberMenu';
 import ShopInfo from './body/ShopInfo';
@@ -106,7 +107,7 @@ const App = () => {
   }, [currentPath]);
 
   return (
-    <>
+    <Router>
       <div style={{ paddingTop: '90px' }}>
         {loginInfo ? (
           <MemberMenu name={data.name} licence={data.licence} />
@@ -114,34 +115,45 @@ const App = () => {
           <CustomerMenu />
         )}
 
-        {!loginInfo && currentPath === '/' ? (
-          <div className="container">
-            <ShopInfo shops={shopsData} update={data.update} />
-          </div>
-        ) : (
-          loginInfo &&
-          (currentPath === '/create' || currentPath === '/update') ? (
+        <Routes>
+          <Route path="/" element={!loginInfo ? (
+            <div className="container">
+              <ShopInfo shops={shopsData} update={data.update} />
+            </div>
+          ) : (
+            <Navigate to="/auth/login" />
+          )} />
+          <Route path="/auth/login" element={!loginInfo ? (
+            <div className="container">
+              <Login setData={setData} setLoginInfo={setLoginInfo} />
+            </div>
+          ) : (
+            <Navigate to="/" />
+          )} />
+          <Route path="/auth/register" element={!loginInfo ? (
+            <div className="container">
+              <Register />
+            </div>
+          ) : (
+            <Navigate to="/" />
+          )} />
+          <Route path="/create" element={loginInfo ? (
             <div className="container">
               <ShopCU shops={shopsData} update={data.update} />
             </div>
           ) : (
-            currentPath === '/auth/login' ? (
-              <div className="container">
-                <Login setData={setData} setLoginInfo={setLoginInfo}/>
-              </div>
-            ) : currentPath === '/auth/register' ? (
-              <div className="container">
-                <Register />
-              </div>
-            ) : (
-              <div className="container">
-                <ShopInfo shops={shopsData} update={data.update} />
-              </div>
-            )
-          )
-        )}
+            <Navigate to="/auth/login" />
+          )} />
+          <Route path="/update" element={loginInfo ? (
+            <div className="container">
+              <ShopCU shops={shopsData} update={data.update} />
+            </div>
+          ) : (
+            <Navigate to="/auth/login" />
+          )} />
+        </Routes>
       </div>
-    </>
+    </Router>
   );
 };
 
