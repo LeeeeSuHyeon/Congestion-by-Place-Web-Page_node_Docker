@@ -9,15 +9,28 @@ import Login from './body/Login';
 import Register from './body/Register';
 import ShopCU from './body/ShopCU';
 
-import './App.css';
-
 const url = 'http://192.168.64.8:7080';
 const currentPath = window.location.pathname;
 
 const App = () => {
-  const [loginInfo, setLoginInfo] = useState(false);
+  // sessionLogin 저장된 login 값을 가져옴
+  const sessionLogin = window.sessionStorage.getItem("login");
+
+  // sessionLogin 값이 "true"일 때는 true
+  const initialLoginState = sessionLogin === "true";
+
+  // login 값이 바뀔때마다 상태 관리
+  const [loginInfo, setLoginInfo] = useState(initialLoginState);
+  console.log('loginInfo : ', loginInfo)
+
+  // login 값이 바뀔 때마다 sessionStorage의 값도 변경하기
+  useEffect(() => {
+    window.sessionStorage.setItem("login", loginInfo.toString());
+  }, [loginInfo]);
+
   const [data, setData] = useState([]);
   const [maxShopId, setMaxShopId] = useState(0);
+
 
   // 서버로부터 홈 정보를 가져오는 비동기 함수
   const fetchLoginInfo = async () => {
@@ -31,7 +44,7 @@ const App = () => {
       console.log(Math.max(...shopIds));
       setData(data);
       setMaxShopId(Math.max(...shopIds)); // shop_id의 최댓값 추출
-      setLoginInfo(data.menu === 'menuForMember');
+      
     } catch (error) {
       console.error('Error fetching login info:', error);
     }
@@ -50,9 +63,9 @@ const App = () => {
     }
   };
 
-  const fetchCutomerViewData = async (vu, id) => {
+  const fetchCutomerViewData = async (locationOrCategory, id) => {
     try {
-      const response = await fetch(url + `/shop/customerView/${vu}/${id}`);
+      const response = await fetch(url + `/shop/customerView/${locationOrCategory}/${id}`);
       if (response.ok) {
         const data = await response.json();
         setData(data);
@@ -100,7 +113,7 @@ const App = () => {
     };
 
     fetchData();
-  }, []);
+  }, [currentPath]);
 
   return (
     <Router>
@@ -108,7 +121,7 @@ const App = () => {
         {loginInfo ? (
           <MemberMenu name={data.name} licence={data.licence} setLoginInfo={setLoginInfo} />
         ) : (
-          <CustomerMenu />
+          <CustomerMenu fetchCutomerViewData = {fetchCutomerViewData}/>
         )}
 
         <Routes>
@@ -117,20 +130,16 @@ const App = () => {
               <ShopInfo shops={data.shops} update={data.update} />
             </div>
           } />
-          <Route path="/auth/login" element={!loginInfo ? (
+          <Route path="/auth/login" element={
             <div className="container">
               <Login setData={setData} setLoginInfo={setLoginInfo} />
             </div>
-            ) : (
-              <Navigate to="/" />
-          )} />
-          <Route path="/auth/register" element={!loginInfo ? (
+            } />
+          <Route path="/auth/register" element={
             <div className="container">
               <Register />
             </div>
-            ) : (
-              <Navigate to="/" />
-          )} />
+           } />
           <Route path="/create" element={loginInfo ? (
             <div className="container">
               <ShopCU shops={data.shops} update={data.update} />
@@ -145,6 +154,14 @@ const App = () => {
             ) : (
               <Navigate to="/auth/login" />
           )} />
+          <Route
+            path="/shop/customerView/:locationOrCategory/:id"
+            element={
+              <div className="container">
+                <ShopInfo shops={data.shops} update={data.update} />
+              </div>
+            }
+          />
         </Routes>
       </div>
     </Router>

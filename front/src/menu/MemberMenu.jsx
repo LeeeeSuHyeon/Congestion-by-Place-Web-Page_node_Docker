@@ -8,8 +8,8 @@ const MemberMenu = ({name, licence, setLoginInfo}) => {
 
   const handleLogout = () => {
     if (window.confirm('로그아웃 하시겠습니까?')) {
-      setLoginInfo(false);
-      navigate('/login');
+      window.sessionStorage.setItem("login", "false");
+      navigate('/');
     }
   };
 

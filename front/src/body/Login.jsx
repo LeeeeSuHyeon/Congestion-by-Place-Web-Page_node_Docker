@@ -26,6 +26,11 @@ const Login = ({setData, setLoginInfo}) => {
 
         if (data.success) {
           // 로그인 성공
+
+          // 세션 스토리지에 로그인 정보 저장
+          window.sessionStorage.setItem("login", "true");
+
+
           setData(data);
           setLoginInfo(data.menu === 'menuForMember');
         } else {
