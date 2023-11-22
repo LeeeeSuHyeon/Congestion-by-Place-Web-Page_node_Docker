@@ -1,10 +1,12 @@
 // Login.js
 
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const Login = ({setData, setLoginInfo}) => {
   const [id, setId] = useState('');
   const [pwd, setPwd] = useState('');
+  const navigate = useNavigate();
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -24,15 +26,14 @@ const Login = ({setData, setLoginInfo}) => {
         const data = await response.json();
         console.log(data);
 
+        // 로그인 성공
         if (data.success) {
-          // 로그인 성공
-
           // 세션 스토리지에 로그인 정보 저장
           window.sessionStorage.setItem("login", "true");
-
-
           setData(data);
           setLoginInfo(data.menu === 'menuForMember');
+          // 로그인 성공 후 '/'로 이동
+          navigate('/');
         } else {
           // 로그인 실패
           alert(data.message); // 실패 메시지를 알림으로 표시
