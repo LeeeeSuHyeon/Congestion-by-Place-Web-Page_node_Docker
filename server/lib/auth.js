@@ -3,6 +3,19 @@ var db = require('./db');
 var sanitizeHtml = require('sanitize-html');
 var session = require('express-session')
 
+
+// 미들웨어 함수 정의
+const saveSession = (req, res, next) => {
+    if (req.session.is_logined) {
+      res.locals.is_logined = req.session.is_logined;
+      res.locals.name = req.session.name;
+      res.locals.licence = req.session.licence;
+    }
+    console.log('Session after:', req.session);
+    next();
+};
+
+
 module.exports = {
 
     // 로그인 화면 반환 로직
@@ -44,6 +57,8 @@ module.exports = {
                     req.session.name = result[0].name
                     req.session.licence = result[0].licence
 
+                    console.log('Session after:', req.session);
+
                     // 로그인이 완료되면 화면 이동 후 shop의 데이터를 출력하기 위해, 모든 shop 정보를 가져옴
                     db.query("select * from shop", (err, results) => {
                         var context = {
@@ -55,6 +70,7 @@ module.exports = {
                             licence: req.session.licence,
                             update: 'NO'
                         };
+                        
                         res.json(context);
                     });
                 })
@@ -115,5 +131,7 @@ module.exports = {
                     res.json({ success: true, message: 'Registration is complete! Please log in' });
                 }
             });
-    } // end of register_process
+    }, // end of register_process
+
+    saveSession,
 }

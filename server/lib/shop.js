@@ -18,6 +18,9 @@ module.exports = {
         var licence = req.params.licence        // DB 조회를 위해 url에 사용자의 licence를 표시
         var isOwner = authIsOwner(req, res);    // 로그인 유무 확인
 
+        console.log('session? : ', req.session)
+        console.log('licence? : ', licence)
+        console.log('vu? : ', vu)
         // v를 요청했을 경우 
         if (vu === "v"){
             // 로그인한 유저

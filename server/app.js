@@ -3,7 +3,7 @@ const app = express();
 const cors = require('cors');
 
 // CORS 설정 - Cross-Origin Resource Sharing 문제 해결을 위함 
-app.use(cors());
+app.use(cors({ origin: true, credentials: true }));
 
 
 // 포트 번호를 환경 변수로 설정하고, 기본값은 7080로 지정
@@ -26,7 +26,11 @@ app.use(session({
    secret : 'keyboard cat',
    resave : false,
    saveUninitialized : true,
-   store : sessionStore
+   store : sessionStore,
+   cookie: {
+      secure: true, // HTTPS 연결일 때만 쿠키 전송
+      sameSite: 'None',
+    },
 }));
 
 
@@ -39,6 +43,11 @@ app.use(bodyParser.json());
 var rootRouter = require('./router/rootRouter');
 var authRouter = require('./router/authRouter');
 var shopRouter = require('./router/shopRouter');
+
+var auth = require('./lib/auth');
+
+// 미들웨어를 사용
+app.use(auth.saveSession);
 
 // 라우팅 - router 폴더의 Router들에게 url을 분류해서 전달함 
 app.use('/', rootRouter);

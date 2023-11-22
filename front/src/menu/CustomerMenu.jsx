@@ -1,18 +1,20 @@
 // CustomerMenu.jsx
 
 import React from 'react';
-import { Link, useLocation } from 'react-router-dom'; 
+import { Link } from 'react-router-dom'; 
 
 const CustomerMenu = ({fetchCutomerViewData}) => {
   
+  // 지역, 카테고리와 select value를 이용해 원하는 매장을 검색하는 함수 
   const handleLinkClick = (locationOrCategory, id) => {
     fetchCutomerViewData(locationOrCategory, id);
   };
-  // const location = useLocation();
+  
 
   return (
     <nav className="navbar navbar-expand-lg navbar-dark fixed-top" style={{ backgroundColor: '#4facee' }}>
       <div className="container-fluid">
+        {/* 홈 화면 이동 */}
         <Link className="navbar-brand" to="/">
           Home
         </Link>
@@ -29,7 +31,7 @@ const CustomerMenu = ({fetchCutomerViewData}) => {
         </button>
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
           <ul className="navbar-nav me-auto mb-2 mb-lg-0">
-            {/* 위치 시작 */}
+            {/* 위치 드롭다운 시작 */}
             <li className="nav-item dropdown">
               <Link
                 className="nav-link dropdown-toggle"
@@ -65,7 +67,7 @@ const CustomerMenu = ({fetchCutomerViewData}) => {
               </ul>
             </li>
             {/* 위치 끝 */}
-            {/* 카테고리 시작 */}
+            {/* 카테고리 드롭다운 시작 */}
             <li className="nav-item dropdown">
               <Link
                 className="nav-link dropdown-toggle"
@@ -102,7 +104,7 @@ const CustomerMenu = ({fetchCutomerViewData}) => {
             </li>
             {/* 카테고리 끝 */}
           </ul>
-          {/* 이 자리에 로그인 버튼 추가 */}
+          {/* 로그인 버튼  */}
           <ul className="navbar-nav">
             <li className="nav-item">
               <a
@@ -113,6 +115,7 @@ const CustomerMenu = ({fetchCutomerViewData}) => {
                 사업자 로그인
               </a>
             </li>
+            {/* 회원가입 버튼 */}
             <li className="nav-item">
               <a
                 className="nav-link"
@@ -123,7 +126,6 @@ const CustomerMenu = ({fetchCutomerViewData}) => {
               </a>
             </li>
           </ul>
-          {/* 로그인 버튼 끝 */}
         </div>
       </div>
     </nav>
