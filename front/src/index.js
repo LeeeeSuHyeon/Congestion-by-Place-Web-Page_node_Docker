@@ -1,9 +1,8 @@
+// index.js
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-// import reportWebVitals from './reportWebVitals';
-
+import styles from './index.css';  // CSS 파일을 모듈로 import
+import App from './App.js';
 
 ReactDOM.render(
   <React.StrictMode>
@@ -11,4 +10,3 @@ ReactDOM.render(
   </React.StrictMode>,
   document.getElementById('root')
 );
-

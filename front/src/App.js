@@ -2,12 +2,12 @@
 
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
-import CustomerMenu from './menu/CustomerMenu';
-import MemberMenu from './menu/MemberMenu';
-import ShopInfo from './body/ShopInfo';
-import Login from './body/Login';
-import Register from './body/Register';
-import ShopCU from './body/ShopCU';
+import CustomerMenu from './menu/CustomerMenu.jsx';
+import MemberMenu from './menu/MemberMenu.jsx';
+import ShopInfo from './body/ShopInfo.jsx';
+import Login from './body/Login.jsx';
+import Register from './body/Register.jsx';
+import ShopCU from './body/ShopCU.jsx';
 
 const url = 'http://192.168.64.8:7080';
 const currentPath = window.location.pathname;
