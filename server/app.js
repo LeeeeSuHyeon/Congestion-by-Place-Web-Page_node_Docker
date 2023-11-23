@@ -14,23 +14,23 @@ var session = require('express-session');
 var MySqlStore = require('express-mysql-session')(session); // db에 저장하기 위한 세션 
 
 var options = {
-   host : '172.18.0.2', // MySQL 호스트 주소로 컨테이너를 실행하는 호스트 머신의 IP 주소를 사용
-   user : 'project-db',
-   password : '1234',
-   database : 'project-db'
+    // host : '172.18.0.2',    // MySQL 호스트 주소로 컨테이너의 IP 주소
+    // MySQL 컨테이너가 재시작할 때 호스트 주소가 변경되므로, Docker Compose의 네트워크를 활용
+    // 도커 컴포즈에서 서비스 간 통신을 위해 사용하는 네트워크는 컨테이너의 이름으로도 접근 가능
+    host : 'mysql_project', 
+    user : 'project-db',
+    password : '1234',
+    database : 'project-db'
 };
 
+// DB에 세션 저장 
 var sessionStore = new MySqlStore(options);
    
 app.use(session({
    secret : 'keyboard cat',
    resave : false,
    saveUninitialized : true,
-   store : sessionStore,
-   cookie: {
-      secure: true, // HTTPS 연결일 때만 쿠키 전송
-      sameSite: 'None',
-    },
+   store : sessionStore
 }));
 
 
